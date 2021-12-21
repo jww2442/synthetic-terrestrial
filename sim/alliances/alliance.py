@@ -1,9 +1,9 @@
 import random
 
-class alliance:
+class Alliance:
 
     #constructor, accepts first_member of type agent
-    def alliance(self, first_member):
+    def __init__(self, first_member):
         self.members = [first_member]
         self.strength = first_member.strength
         self.aggression = first_member.aggression

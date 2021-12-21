@@ -1,7 +1,9 @@
 class Agent:
     
-    def Agent(self, strength_dist, aggr_dist):
+    def __init__(self, name, strength_dist, aggr_dist):
         
-        self.strength = strength_dist.sample()
+        self.name = name
+
+        self.strength =  strength_dist#.sample()
         
-        self.aggression = aggr_dist.sample()
+        self.aggression = aggr_dist#.sample()
