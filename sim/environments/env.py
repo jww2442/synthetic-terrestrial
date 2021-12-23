@@ -1,11 +1,13 @@
 class Environment:
 
+    # init the environment
     def __init__(self, alliances):
+        # list of alliance objects
         self.alliances = alliances
 
     # days or cycles defined in the simulation
     # several events happen between alliances 
-    def day(self):
+    def _day(self):
         #step 1: choose which alliances are interacting
         interact_sets = self._create_encounter_pairs()
         
@@ -26,13 +28,17 @@ class Environment:
 
 
     # for initial release, agents always fight therefore alliances.alliance.will_fight is always true
-    def _interact(interact_sets):
+    def _interact(self, interact_sets):
         for group_of_alliances in interact_sets:
             if(group_of_alliances[0].will_fight() or group_of_alliances[1].will_fight()):  # if either will fight
                 if (group_of_alliances[0].fight() < group_of_alliances[1].fight()):
                     # alliance[1] wins
-                    pass
+                    self._kill(group_of_alliances[0])
                 else:
-                    pass
                     # alliance[0] wins
+                    self._kill(group_of_alliances[1])
             # if neither will fight then do what?
+    
+    # kill function that removes an alliance from the data structure
+    def _kill(self, dead_alliance):
+        self.alliances.remove(dead_alliance)
