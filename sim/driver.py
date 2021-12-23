@@ -25,4 +25,4 @@ env = Environment(alliances)
 num_days = 50
 
 for i in range(num_days):
-    env = 
+    pass#env = 
