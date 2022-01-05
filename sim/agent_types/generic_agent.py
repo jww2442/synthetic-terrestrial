@@ -1,9 +1,9 @@
-class Agent:
+from abc import ABC, abstractmethod #might make this class abstract
+
+
+
+class Agent(ABC):
     
-    def __init__(self, name, strength, aggr):
+    def __init__(self, name):
         
         self.name = name
-
-        self.strength = strength
-        
-        self.aggression = aggr#.sample()

@@ -26,3 +26,19 @@ num_days = 50
 
 for i in range(num_days):
     pass#env = 
+
+    # # days or cycles defined in the simulation
+    # # several events happen between alliances 
+    # def day(self):
+
+    #     #step 1: choose which alliances are interacting
+    #     interactions = self.create_interactions()
+        
+    #     #step 2: change alliances based on result of each interaction
+    #     for interaction in interactions:
+    #         alliance_choices = interaction.determine_choice_of_each_alliance()
+    #         new_alliance_groupings = interaction.outcome()
+    #         for alliance in interaction:
+    #             self.alliances.remove(alliance)
+    #         self.alliances.extend(new_alliance_groupings)
+            
