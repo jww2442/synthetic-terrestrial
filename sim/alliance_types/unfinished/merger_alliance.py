@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from generic_alliance import Alliance
 
 class mergable_alliance(Alliance):
@@ -12,6 +11,7 @@ class mergable_alliance(Alliance):
         self.strength += other_alli.strength
         self.members.extend(other_alli.members)
 
-    @abstractmethod
     def choose_collective_action(possible_choices):
+        if('merge' in possible_choices):
+            return 'merge'
         pass
