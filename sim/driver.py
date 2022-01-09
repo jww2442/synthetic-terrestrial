@@ -1,11 +1,8 @@
 # imports
+from typing import Counter
 import environment_types
 import alliance_types
 import agent_types
-
-#from environments.env import Environment
-#from agents.agent import Agent
-#from alliances.alliance import Alliance
 
 import random
 from pprint import pprint
@@ -31,6 +28,13 @@ type_of_agents = settings['agentType']
 type_of_environment = settings['environmentType']
 type_of_alliances = settings['allianceType']
 
+print(type_of_agents)
+print(type_of_alliances)
+
+win_condition = False # arbitrary win condition that can be defined in its
+                      # own function and varied in sim_settings
+current_day = 0 #init phase
+
 alliances = []
 
 for i in range(num_agents):
@@ -38,9 +42,13 @@ for i in range(num_agents):
     # consider how to handle the nonhomogeneous case of agents
     # and alliances
     if type_of_agents == 'basic' and type_of_alliances == 'basic' :
-        agent = BasicAgent(10*random.random(), 20*random.random())
+        counter = 0
+        agent_name = str(counter)
+        # init with name, strength
+        agent = BasicAgent(agent_name, 10*random.random())
         alliance = BasicAlliance(agent)
         alliances.append(alliance)
+        counter += 1
     else:
         print('err000 agents and alliances are not basic unhandled exception')
 
@@ -52,22 +60,28 @@ if type_of_environment == 'basic':
 else:
     print('err001 environment is not basic unhandled exception')
 
+current_day += 1
+#debug
+print('active alliances day: ', current_day)
+
 # actual epoch cycle
-for i in range(num_days):
-    pass#env = 
+while not win_condition or current_day <= num_days:
 
-    # # days or cycles defined in the simulation
-    # # several events happen between alliances 
-    # def day(self):
+    # create the interaction groups
+    interaction_groups = env.group_all()
+    # interaction changes the list of alliances therefore reset it and update
+    alliances = []
 
-    #     #step 1: choose which alliances are interacting
-    #     interactions = self.create_interactions()
-        
-    #     #step 2: change alliances based on result of each interaction
-    #     for interaction in interactions:
-    #         alliance_choices = interaction.determine_choice_of_each_alliance()
-    #         new_alliance_groupings = interaction.outcome()
-    #         for alliance in interaction:
-    #             self.alliances.remove(alliance)
-    #         self.alliances.extend(new_alliance_groupings)
+    for interact_set in interaction_groups:
+        # is a set and can be one or more alliances
+        resultant_alliances = env.interact(interact_set)
+        # add to new list of alive alliances
+        for alli in resultant_alliances:
+            alliances.append(alli)
+
+    current_day += 1 # day is now done
+
+    #debug
+    print('active alliances day: ', current_day)
+    print(alliances)
             

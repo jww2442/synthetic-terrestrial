@@ -1,4 +1,4 @@
-from generic_alliance import Alliance
+from alliance_types.generic_alliance import Alliance
 
 class BasicAlliance(Alliance):
 

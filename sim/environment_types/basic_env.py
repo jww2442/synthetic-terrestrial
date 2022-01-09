@@ -1,5 +1,6 @@
-from generic_env import Environment
+from environment_types.generic_env import Environment
 import numpy as np
+import random as rand
 
 
 class BasicENV(Environment):
@@ -7,7 +8,7 @@ class BasicENV(Environment):
     def group_all(self):
         interaction_groups = []
         alliances_copy = self.alliances.copy()
-        alliances_copy.shuffle()
+        rand.shuffle(alliances_copy)
         for i in range(0, len(alliances_copy), 2):
 
             interaction_groups.append({alliances_copy[i], alliances_copy[i+1]})
@@ -20,6 +21,7 @@ class BasicENV(Environment):
         for alliance in group:
             decisions.add({alliance.decide(group - alliance)})
 
+        # determine who, in the group, has biggest str
         if(decisions.contains('fight')): 
             winner = None
             max_str = -np.inf

@@ -1,4 +1,4 @@
-import generic_agent as ga
+import agent_types.generic_agent as ga
 
 
 class BasicAgent(ga.Agent):
