@@ -13,6 +13,7 @@ class BasicAlliance(Alliance):
             print('err413491')
             exit() #always fight
 
+    # strength fx defined as average of each agent in the alliance
     def get_strength(self): 
         str = 0
         for member in self.members:

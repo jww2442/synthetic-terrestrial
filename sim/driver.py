@@ -1,29 +1,58 @@
-from environments.env import Environment
-from agents.agent import Agent
-from alliances.alliance import Alliance
+# imports
+import environment_types
+import alliance_types
+import agent_types
+
+#from environments.env import Environment
+#from agents.agent import Agent
+#from alliances.alliance import Alliance
 
 import random
 from pprint import pprint
+import json
 
+from agent_types.basic_agent import BasicAgent
+from alliance_types.basic_alliance import BasicAlliance
+from environment_types.basic_env import BasicENV
 
-num_agents = 20
+# sim_settings.json allows for easy change of game settings without 
+# changing info in source code. we can change the type of env, allowed
+# types of agents, numDays, etc.
+
+# we import the file and assign variables accordingly. enventually, this will
+# be done using a GUI.
+settingsFile = open('sim/sim_settings.json')
+settings = json.load(settingsFile)
+
+# setting variables
+num_days = settings['numberOfDaysInSim']
+num_agents = settings['numberOfTotalAgents']
+type_of_agents = settings['agentType']
+type_of_environment = settings['environmentType']
+type_of_alliances = settings['allianceType']
+
 alliances = []
 
 for i in range(num_agents):
-    agent = Agent(10*random.random(), 20*random.random())
-    alliance = Alliance(agent)
-    alliances.append(alliance)
+    # assume all agents and alliances are basic for now
+    # consider how to handle the nonhomogeneous case of agents
+    # and alliances
+    if type_of_agents == 'basic' and type_of_alliances == 'basic' :
+        agent = BasicAgent(10*random.random(), 20*random.random())
+        alliance = BasicAlliance(agent)
+        alliances.append(alliance)
+    else:
+        print('err000 agents and alliances are not basic unhandled exception')
 
-for i in alliances:
-    pprint(vars(i))
+#for i in alliances:
+ #   pprint(vars(i))
 
+if type_of_environment == 'basic':
+    env = BasicENV(alliances)
+else:
+    print('err001 environment is not basic unhandled exception')
 
-env = Environment(alliances)
-
-
-
-num_days = 50
-
+# actual epoch cycle
 for i in range(num_days):
     pass#env = 
 

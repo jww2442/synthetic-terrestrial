@@ -1,0 +1,8 @@
+
+{
+    "numberOfDaysInSim" : 50,
+    "numberOfTotalAgents" : 20,
+    "agentType": "basic",
+    "environmentType": "basic",
+    "allianceType": "basic:"
+}
